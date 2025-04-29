@@ -1,0 +1,18 @@
+body{
+    background-color: rgb(164, 216, 233);
+}
+
+#formulario {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    transform: translate(-50%, -50%);
+    background-color: rgb(105, 184, 158);
+    padding: 20px; /* opcional: para que el contenido no esté pegado */
+    border-radius: 10px; /* opcional: bordes redondeados */
+}
+.inputs{
+    font-size: 25px;
+}
