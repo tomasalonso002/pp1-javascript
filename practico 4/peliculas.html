@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="pacgin">
+        <div class="apart_elimainar_pel">
+            <input id="posicion_pelicula" placeholder="Posicion a eliminar" type="number">
+            <input id="cantidad_pelicula" placeholder="Cantidad a eliminar"  type="number">
+            <button onclick="eliminar()">Eliminar</button>
+        </div>
+        <div>
+            <h3 >Total de peliculas:</h3>
+            <p id="total_peliculas_almacenadas"></p>
+        </div>
+        <div>
+            <input id="pelicula_nueva" placeholder="Ingrese una nueva pelicula" type="text">
+            <button onclick="agregar_pelicula()">Agregar Pelicula</button>
+            <p id="mje_error_pelicula_nueva"></p>
+        </div>
+        
+        <div class="boton_modificar_lista">
+            <button onclick="modificar_lista_peliculas()">Modificar lista peliculas</button>
+        </div>
+        <button onclick="mostrar_peliculas()">Mostrar Peliculas</button>
+        <div>
+            <ul id="lista_peliculas"></ul>
+        </div>
+    </div>
+
+
+    <script src="/js/peliculas.js"></script>
+</body>
+</html>
