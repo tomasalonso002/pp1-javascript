@@ -16,7 +16,7 @@ const agregar_producto = () =>{
     }
 }
 
-//INTENTE HACER ESTA FUNCION PERO NO LOGRE QUE FUNCIONE
+//INTENTE HACER ESTA FUNCION PARA ELIMINAR UN PRODUCTO ESPECIFICO POR EL NOMBRE, PERO NO LOGRE QUE FUNCIONE
 const eliminar_producto = () =>{
     const producto_a_eliminar = document.getElementById("producto_a_eliminar").value.trim()
     productos.forEach((producto, index) => {
@@ -24,9 +24,10 @@ const eliminar_producto = () =>{
             productos.splice(producto_a_eliminar)
         }
     })
-
 }
 
+
+//LIMPIAR TABLA
 const limpiar_tabla = ()=>{
     const tabla = document.getElementById("tabla_productos").querySelector("tbody")
     tabla.innerHTML= ""

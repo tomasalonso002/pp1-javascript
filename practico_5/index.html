@@ -3,41 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/style.css">
     <title>Gestor de Productos</title>
 </head>
 <body>
-    <h1>Gestor de Productos</h1>
-    
-    <form onsubmit="agregar_producto(); return false">
-        <input type="text" id="nombre" placeholder="Nombre del Producto" required>
-        <input type="text" id="categoria" placeholder="Nombre de la categoria" required>
-        <input type="number" id="precio" placeholder="Precio" required>
-        <br>
-        <br>
-        <button type="submit">Agregar Producto</button>
-        <br>
-    </form>
-    <form onsubmit="eliminar_producto(); return false">
-    <H4>Eliminar Producto</H4>
-    <input type="text" id="producto_a_eliminar" placeholder="Nombre producto a eliminar" required>
-    <button type="submit">Eliminar Producto</button>
-    </form>
-    <br>
-    <button onclick="limpiar_tabla()">Limpiar Tabla</button>
-    <br>
-    <br>
-    <table border="1" id="tabla_productos">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Categoria</th>
-                <th>Precio</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+    <h1 class="titulo_productos">Gestor de Productos</h1>
+    <div class="box_cargar_producto">
+        <form onsubmit="agregar_producto(); return false" class="seccion_cargar_producto">
+            <input type="text" id="nombre" placeholder="Nombre del Producto" required>
+            <input type="text" id="categoria" placeholder="Nombre de la categoria" required>
+            <input type="number" id="precio" placeholder="Precio" required>
+            <button type="submit">Agregar Producto</button>
+        </form>
+    </div>
+
+    <div class="box_eliminar_producto">
+        <form onsubmit="eliminar_producto(); return false">
+            <H4 class="titulo_eliminar_producto">Eliminar Producto</H4>
+            <input type="text" id="producto_a_eliminar" placeholder="Nombre producto a eliminar" required>
+            <button type="submit">Eliminar Producto</button>
+        </form>
+    </div>
+
+    <div class="box_limpiar_tabla">
+        <button onclick="limpiar_tabla()">Limpiar Tabla</button>
+    </div>
+    <div class="tabla_productos">
+        <table border="1" id="tabla_productos" ">
+            <thead class="head_tabla_productos">
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Categoria</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
     <script src="/js/archivo.js"></script>
 </body>
 </html>

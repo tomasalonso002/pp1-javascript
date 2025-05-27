@@ -1,0 +1,47 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color: aqua;
+}
+.titulo_productos{
+    text-align: center;
+}
+
+.seccion_cargar_producto{
+    height: 100%;
+    width: 300px;
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.box_cargar_producto{
+margin-top: 10px;
+display: flex;
+justify-content: center;
+}
+
+.titulo_eliminar_producto{
+    margin-bottom:1px ;
+}
+
+.box_eliminar_producto{
+    display: flex;
+    justify-content: center;
+}
+
+.box_limpiar_tabla{
+    display: flex;
+    justify-content: center;
+    margin-top:10px ;
+}
+
+.tabla_productos{
+    margin-top:10px;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
