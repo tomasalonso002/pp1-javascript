@@ -3,8 +3,7 @@ body{
     padding: 0px;
     background-color: aqua;
 }
-.titulo_productos,
-.box_precio_total{
+.titulo_productos{
     text-align: center;
 }
 
@@ -37,6 +36,11 @@ justify-content: center;
 
 .precio_total{
     display: inline;
+}
+
+.box_precio_total{
+    text-align: center;
+    margin-top: 10px;
 }
 
 

@@ -1,18 +1,24 @@
-const productos = []
+let productos = JSON.parse(localStorage.getItem("productos")) || []
 
 const agregar_producto = () =>{
     const nombre = document.getElementById("nombre").value.trim()
     const categoria = document.getElementById("categoria").value.trim()
     const precio = parseFloat(document.getElementById("precio").value)
     if (nombre !== "" && categoria !== "" && precio !== ""){
+        
+
         productos.push({nombre, categoria, precio})
+
+        localStorage.setItem("productos", JSON.stringify(productos))
+
         cargar_producto()
 
         document.getElementById("nombre").value = ""
         document.getElementById("categoria").value = ""
         document.getElementById("precio").value = ""
+
     }
-    
+
     sumar_precio()
 
 }
@@ -22,8 +28,10 @@ const agregar_producto = () =>{
 const limpiar_tabla = ()=>{
     const tabla = document.getElementById("tabla_productos").querySelector("tbody")
     const total_precio = document.getElementById("precio_total")
+    localStorage.setItem("productos", JSON.stringify(productos))
     tabla.innerHTML= ""
     total_precio.innerText = "$"
+    sumar_precio()
     
 }
 
@@ -39,6 +47,7 @@ const sumar_precio = ()=>{
     
 }
 
+
  //CARGA DE PRODUCTOS
 const cargar_producto = () => {
     const tabla = document.getElementById("tabla_productos").querySelector("tbody")
@@ -52,11 +61,25 @@ const cargar_producto = () => {
         <td>${producto.nombre}</td>
         <td>${producto.categoria}</td>
         <td>${producto.precio}</td>
-        <td><input type="Checkbox" class="checkbox_eliminar"></td>
+        <td><button onclick="eliminar_producto(${index})">Eliminar</button></td>
         `
         tabla.appendChild(fila)
     })
 }
+
+const eliminar_producto=(index)=>{
+    productos.splice(index,1)
+
+    localStorage.setItem("productos", JSON.stringify(productos))
+    cargar_producto()
+    sumar_precio()
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    sumar_precio()
+    cargar_producto()
+})
+
 
 
 
