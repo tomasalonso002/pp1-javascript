@@ -3,7 +3,8 @@ body{
     padding: 0px;
     background-color: aqua;
 }
-.titulo_productos{
+.titulo_productos,
+.box_precio_total{
     text-align: center;
 }
 
@@ -21,14 +22,6 @@ display: flex;
 justify-content: center;
 }
 
-.titulo_eliminar_producto{
-    margin-bottom:1px ;
-}
-
-.box_eliminar_producto{
-    display: flex;
-    justify-content: center;
-}
 
 .box_limpiar_tabla{
     display: flex;
@@ -40,6 +33,10 @@ justify-content: center;
     margin-top:10px;
     display: flex;
     justify-content: center;
+}
+
+.precio_total{
+    display: inline;
 }
 
 

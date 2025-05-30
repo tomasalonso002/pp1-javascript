@@ -3,7 +3,7 @@ const productos = []
 const agregar_producto = () =>{
     const nombre = document.getElementById("nombre").value.trim()
     const categoria = document.getElementById("categoria").value.trim()
-    const precio = document.getElementById("precio").value
+    const precio = parseFloat(document.getElementById("precio").value)
     
 
     if (nombre !== "" && categoria !== "" && precio !== ""){
@@ -14,25 +14,29 @@ const agregar_producto = () =>{
         document.getElementById("categoria").value = ""
         document.getElementById("precio").value = ""
     }
-}
-
-//INTENTE HACER ESTA FUNCION PARA ELIMINAR UN PRODUCTO ESPECIFICO POR EL NOMBRE, PERO NO LOGRE QUE FUNCIONE
-const eliminar_producto = () =>{
-    const producto_a_eliminar = document.getElementById("producto_a_eliminar").value.trim()
-    productos.forEach((producto, index) => {
-        if(producto.nombre === producto_a_eliminar){
-            productos.splice(producto_a_eliminar)
-        }
-    })
+    sumar_precio()
 }
 
 
 //LIMPIAR TABLA
 const limpiar_tabla = ()=>{
     const tabla = document.getElementById("tabla_productos").querySelector("tbody")
+    const total_precio = document.getElementById("precio_total")
     tabla.innerHTML= ""
+    total_precio.innerText = "$"
+    
 }
 
+const sumar_precio = ()=>{
+    const total_precio = document.getElementById("precio_total")
+    let suma_precios = 0
+
+    for (let i = 0; i < productos.length; i++){
+        suma_precios = suma_precios + productos[i].precio
+    }
+    total_precio.innerText = `$ ${suma_precios}`
+    
+}
 
 const cargar_producto = () => {
     const tabla = document.getElementById("tabla_productos").querySelector("tbody")
@@ -46,9 +50,13 @@ const cargar_producto = () => {
         <td>${producto.nombre}</td>
         <td>${producto.categoria}</td>
         <td>${producto.precio}</td>
+        <td><input type="Checkbox" class="checkbox_eliminar"></td>
         `
         tabla.appendChild(fila)
     })
 }
+
+
+
 
 

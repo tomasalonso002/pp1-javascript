@@ -17,13 +17,6 @@
         </form>
     </div>
 
-    <div class="box_eliminar_producto">
-        <form onsubmit="eliminar_producto(); return false">
-            <H4 class="titulo_eliminar_producto">Eliminar Producto</H4>
-            <input type="text" id="producto_a_eliminar" placeholder="Nombre producto a eliminar" required>
-            <button type="submit">Eliminar Producto</button>
-        </form>
-    </div>
 
     <div class="box_limpiar_tabla">
         <button onclick="limpiar_tabla()">Limpiar Tabla</button>
@@ -36,12 +29,21 @@
                     <th>Nombre</th>
                     <th>Categoria</th>
                     <th>Precio</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
             </tbody>
         </table>
     </div>
+    <div class="box_precio_total">
+        <h3 class="precio_total">Total:</h3>
+        <p class="precio_total" id="precio_total"></p>
+    </div>
+    <div>
+        <button onclick="eliminar_productos_seleccionados()">Eliminar Seleccionados</button>
+    </div>
+    
     <script src="/js/archivo.js"></script>
 </body>
 </html>
