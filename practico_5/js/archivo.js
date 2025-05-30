@@ -4,8 +4,6 @@ const agregar_producto = () =>{
     const nombre = document.getElementById("nombre").value.trim()
     const categoria = document.getElementById("categoria").value.trim()
     const precio = parseFloat(document.getElementById("precio").value)
-    
-
     if (nombre !== "" && categoria !== "" && precio !== ""){
         productos.push({nombre, categoria, precio})
         cargar_producto()
@@ -14,7 +12,9 @@ const agregar_producto = () =>{
         document.getElementById("categoria").value = ""
         document.getElementById("precio").value = ""
     }
+    
     sumar_precio()
+
 }
 
 
@@ -27,6 +27,7 @@ const limpiar_tabla = ()=>{
     
 }
 
+//SUMA PRECIO TOTAL
 const sumar_precio = ()=>{
     const total_precio = document.getElementById("precio_total")
     let suma_precios = 0
@@ -38,6 +39,7 @@ const sumar_precio = ()=>{
     
 }
 
+ //CARGA DE PRODUCTOS
 const cargar_producto = () => {
     const tabla = document.getElementById("tabla_productos").querySelector("tbody")
 
