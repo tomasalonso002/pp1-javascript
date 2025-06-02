@@ -4,9 +4,8 @@ const agregar_producto = () =>{
     const nombre = document.getElementById("nombre").value.trim()
     const categoria = document.getElementById("categoria").value.trim()
     const precio = parseFloat(document.getElementById("precio").value)
+    
     if (nombre !== "" && categoria !== "" && precio !== ""){
-        
-
         productos.push({nombre, categoria, precio})
 
         localStorage.setItem("productos", JSON.stringify(productos))
@@ -23,18 +22,6 @@ const agregar_producto = () =>{
 
 }
 
-
-//LIMPIAR TABLA
-const limpiar_tabla = ()=>{
-    const tabla = document.getElementById("tabla_productos").querySelector("tbody")
-    const total_precio = document.getElementById("precio_total")
-    localStorage.setItem("productos", JSON.stringify(productos))
-    tabla.innerHTML= ""
-    total_precio.innerText = "$"
-    sumar_precio()
-    
-}
-
 //SUMA PRECIO TOTAL
 const sumar_precio = ()=>{
     const total_precio = document.getElementById("precio_total")
@@ -46,7 +33,6 @@ const sumar_precio = ()=>{
     total_precio.innerText = `$ ${suma_precios}`
     
 }
-
 
  //CARGA DE PRODUCTOS
 const cargar_producto = () => {
@@ -65,6 +51,7 @@ const cargar_producto = () => {
         `
         tabla.appendChild(fila)
     })
+    sumar_precio()
 }
 
 const eliminar_producto=(index)=>{
@@ -76,12 +63,5 @@ const eliminar_producto=(index)=>{
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    sumar_precio()
     cargar_producto()
 })
-
-
-
-
-
-

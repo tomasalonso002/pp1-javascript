@@ -12,7 +12,7 @@
         <form onsubmit="agregar_producto(); return false" class="seccion_cargar_producto">
             <input type="text" id="nombre" placeholder="Nombre del Producto" required>
             <input type="text" id="categoria" placeholder="Nombre de la categoria" required>
-            <input type="number" id="precio" placeholder="Precio" required>
+            <input type="number" id="precio" placeholder="Precio" required min="0">
             <button type="submit">Agregar Producto</button>
         </form>
     </div>
