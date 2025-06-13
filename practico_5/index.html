@@ -17,19 +17,23 @@
         </form>
     </div>
 
-
-    <div class="box_limpiar_tabla">
-        <button onclick="limpiar_tabla()">Limpiar Tabla</button>
-    </div>
+    <h3>Filtrar Productos</h3>
+    <input type="text" id="busqueda" placeholder="Buscar Nombre" oninput="filtar_productos()">
+    <br>
+    <h3>Filtrar por selector por categoria</h3>
+    <select id="filtro_categoria" onchange="filtrar_por_categoria()">
+        <option value="todas">Todas</option>
+    </select>
+    <br>
     <div class="tabla_productos">
-        <table border="1" id="tabla_productos" ">
+        <table border="1" id="tabla_productos">
             <thead class="head_tabla_productos">
                 <tr>
                     <th>#</th>
                     <th>Nombre</th>
                     <th>Categoria</th>
                     <th>Precio</th>
-                    <th>Eliminar</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,6 +44,9 @@
         <h3 class="precio_total">Total:</h3>
         <p class="precio_total" id="precio_total"></p>
     </div>
+
+    <h3>Resumen de productos</h3>
+    <div id="resumen_productos"></div>
     
     
     <script src="/js/archivo.js"></script>
