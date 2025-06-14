@@ -10,6 +10,7 @@ const agregar_producto = () =>{
     const precio = parseFloat(document.getElementById("precio").value)
     
     if (nombre !== "" && categoria !== "" && precio !== ""){
+        
         if (editando){
             productos[indice_editar] = {nombre, categoria, precio}
             editando = false
@@ -22,7 +23,7 @@ const agregar_producto = () =>{
         
         localStorage.setItem("productos", JSON.stringify(productos))
 
-        cargar_producto()
+        renderizar_productos()
         mostrar_resumen()
         actualizar_select_categorias()
 
@@ -42,7 +43,7 @@ const filtar_productos = ()=>{
 
     const productos_filtrados = productos.filter(producto => producto.categoria.toLowerCase().includes(texto))
 
-    cargar_producto(productos_filtrados)
+    renderizar_productos(productos_filtrados)
 }
 
 //SUMA PRECIO TOTAL
@@ -57,22 +58,22 @@ const sumar_precio = ()=>{
 }
 
  //CARGA DE PRODUCTOS
-const cargar_producto = (lista = productos) => {
+const renderizar_productos = (lista = productos) => {
 
     const tabla = document.getElementById("tabla_productos").querySelector("tbody")
 
     tabla.innerText = ""
 
-    lista.forEach((producto, index) => {
+    lista.forEach(producto =>{const index_real = productos.indexOf(producto)
         const fila = document.createElement("tr")
         fila.innerHTML=`
-        <td>${index+1}</td>
+        <td>${index_real+1}</td>
         <td>${producto.nombre}</td>
         <td>${producto.categoria}</td>
         <td>${producto.precio}</td>
         <td>
-            <button onclick="eliminar_producto(${index})">Eliminar</button>
-            <button onclick="editar_producto(${index})">Editar</button>
+            <button onclick="eliminar_producto(${index_real})">Eliminar</button>
+            <button onclick="editar_producto(${index_real})">Editar</button>
         </td>
         `
         tabla.appendChild(fila)
@@ -109,22 +110,21 @@ const mostrar_resumen = () =>{
 const editar_producto = (index)=>{
     const producto = productos[index]
     document.getElementById("nombre").value = producto.nombre
-    document.getElementById("categoria").value= producto.producto
+    document.getElementById("categoria").value= producto.categoria
     document.getElementById("precio").value= producto.precio
 
-    document.querySelector('button[type = "submit"]').innerText = "Actualizar auto"
+    document.querySelector('button[type = "submit"]').innerText = "Actualizar producto"
 
     editando = true
     indice_editar = index
 }
-
 
 //ELIMINAR PRODUCTO
 const eliminar_producto=(index)=>{
     productos.splice(index,1)
 
     localStorage.setItem("productos", JSON.stringify(productos))
-    cargar_producto()
+    renderizar_productos()
     sumar_precio()
 }
 
@@ -138,27 +138,24 @@ const actualizar_select_categorias=()=>{
         const option = document.createElement("option")
         option.value = categoria
         option.text = categoria
-
         select.appendChild(option)
     })
 }
 
-const filtrar_por_categoria=()=>{
-    const categoria = document.getElementById("filtrar_categoria").value
+const filtrar_por_categoria = () => {
+    const categoria = document.getElementById("filtro_categoria").value
 
-    if(categoria === "todas"){
-        agregar_producto()
+    if(categoria === "Todas"){
+        renderizar_productos()
     }else{
         const categorias_filtradas = productos.filter(producto => producto.categoria === categoria)
-        cargar_producto(categorias_filtradas)
+        renderizar_productos(categorias_filtradas)
     }
 }
 
-
-
 //CARGA LA PAGINA UNA VEZ QUE ENTRAS
 document.addEventListener('DOMContentLoaded', () => {
-    cargar_producto()
+    renderizar_productos()
     mostrar_resumen()
     actualizar_select_categorias()
 })
