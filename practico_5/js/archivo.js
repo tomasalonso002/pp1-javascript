@@ -33,8 +33,6 @@ const agregar_producto = () =>{
 
     }
 
-    sumar_precio()
-
 }
 
 //Filtrar Productos por nombre de categoria
@@ -47,24 +45,18 @@ const filtar_productos = ()=>{
 }
 
 //SUMA PRECIO TOTAL
-const sumar_precio = ()=>{
-    const total_precio = document.getElementById("precio_total")
-    let suma_precios = 0
-
-    for (let i = 0; i < productos.length; i++){
-        suma_precios = suma_precios + productos[i].precio
-    }
-    total_precio.innerText = `$ ${suma_precios}`    
-}
 
  //CARGA DE PRODUCTOS
 const renderizar_productos = (lista = productos) => {
+    let precio_total = 0
+    
 
     const tabla = document.getElementById("tabla_productos").querySelector("tbody")
 
-    tabla.innerText = ""
+    tabla.innerHTML = ""
 
     lista.forEach(producto =>{const index_real = productos.indexOf(producto)
+        precio_total = producto.precio + precio_total
         const fila = document.createElement("tr")
         fila.innerHTML=`
         <td>${index_real+1}</td>
@@ -76,9 +68,10 @@ const renderizar_productos = (lista = productos) => {
             <button onclick="editar_producto(${index_real})">Editar</button>
         </td>
         `
+
         tabla.appendChild(fila)
     })
-    sumar_precio()
+    document.getElementById("precio_total").innerText =`$ ${precio_total}`
 }
 
 //RESUMEN DE PRODUCTOS
@@ -125,7 +118,6 @@ const eliminar_producto=(index)=>{
 
     localStorage.setItem("productos", JSON.stringify(productos))
     renderizar_productos()
-    sumar_precio()
 }
 
 //Filtarar por selector
