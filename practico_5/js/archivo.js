@@ -1,7 +1,10 @@
 let productos = JSON.parse(localStorage.getItem("productos")) || []
 
 let editando = false
+
 let indice_editar=null
+
+let orden_ascendente = false
 
 
 const agregar_producto = () =>{
@@ -18,6 +21,17 @@ const agregar_producto = () =>{
             document.querySelector('button[type = "submit"]').innerText = "Agregar Producto"
 
         }else{
+                //El .some() compara
+            const ya_existe = productos.some(producto =>
+                productos.nombre.toLowerCase() === nombre.toLowerCase() &&
+                producto.categoria.toLowerCase() === categoria.toLowerCase()
+            )
+            if(ya_existe){
+                alert("Este producto ya se encuentra cargado en la la lista")
+                return
+            }
+
+            //Guardamos en nuestro array local productos que vamos crendo
             productos.push({nombre, categoria, precio})
         }
         
@@ -43,8 +57,6 @@ const filtar_productos = ()=>{
 
     renderizar_productos(productos_filtrados)
 }
-
-//SUMA PRECIO TOTAL
 
  //CARGA DE PRODUCTOS
 const renderizar_productos = (lista = productos) => {
@@ -72,6 +84,15 @@ const renderizar_productos = (lista = productos) => {
         tabla.appendChild(fila)
     })
     document.getElementById("precio_total").innerText =`$ ${precio_total}`
+}
+
+const ordenar_por_precio =()=>{
+    const productos_ordenados = [...productos].sort((a,b)=>{
+        return orden_ascendente ? a.precio - b.precio : b.precio - a.precio
+    })
+    orden_ascendente = !orden_ascendente
+
+    renderizar_productos(productos_ordenados)
 }
 
 //RESUMEN DE PRODUCTOS
@@ -110,6 +131,7 @@ const editar_producto = (index)=>{
 
     editando = true
     indice_editar = index
+
 }
 
 //ELIMINAR PRODUCTO
