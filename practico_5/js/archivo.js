@@ -58,7 +58,7 @@ const filtar_productos = ()=>{
     renderizar_productos(productos_filtrados)
 }
 
- //CARGA DE PRODUCTOS
+ //RENDERIZAR PRODUCTOS
 const renderizar_productos = (lista = productos) => {
     let precio_total = 0
     
@@ -86,6 +86,7 @@ const renderizar_productos = (lista = productos) => {
     document.getElementById("precio_total").innerText =`$ ${precio_total}`
 }
 
+//Orddenar por precio ascendente o descendente
 const ordenar_por_precio =()=>{
     const productos_ordenados = [...productos].sort((a,b)=>{
         return orden_ascendente ? a.precio - b.precio : b.precio - a.precio

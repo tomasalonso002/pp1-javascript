@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/normalize.css">
+    <link rel="icon" href="/img/book-bookmark-icon_34486.png">
+    <title>Gestor de Libros</title>
+</head>
+<body>
+    <h1 class="tittle">Gestor de Libros</h1>
+    <div>
+        <div class="parte_1">    
+            <div class="box_carga">
+                <h3 class="subtittle">Cargar Libro</h3>
+                    <form onsubmit="agregar_libro(); return false" class="box_form">
+                        <input class="input_carga" type="text" id="titulo_libro" placeholder="Ingrese el titulo del libro" required>
+                        <input class="input_carga" type="text" id="autor_libro" placeholder="Ingrese el autor del libro" required>
+                        <select class="input_carga" id="genero_libro" required>
+                            <option value="" disabled selected>Elegir Genero</option>
+                            <option value="Ficcion">Ficcion</option>
+                            <option value="Historia">Historia</option>
+                            <option value="Drama">Drama</option>
+                            <option value="Novela">Novela</option>
+                            <option value="Leyenda">Leyenda</option>
+                        </select>
+                        <input class="input_carga" type="number" id="anio_publicacion_libro" placeholder="Año publicacion" min="1900" max="2025" required>
+                        <button type="submit" class="input_carga">Cargar Libro</button>
+                    </form>
+            </div>
+            <div class="box_filtro">
+                <div>
+                    <h3 class="subtittle">Filtrar por Autor</h3>
+                    <input type="text" id="valor_filtro" placeholder="Buscar Autor" oninput="filtrar_libros()">
+                </div>
+                <div>
+                    <h3 class="subtittle">Filtrar por genero</h3>
+                    <select id="filtrar_por_genero" onchange="filtrar_por_genero()">
+                        <option value="todos_los_libros">Todos</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="parte_2">
+            <div class="box_tabla">
+                <h3 class="subtittle">Tabla de libros cargados</h3>
+                <table border="1" id="tabla_libros">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Titulo</th>
+                            <th>Autor</th>
+                            <th>Genero</th>
+                            <th>AÑO</th>
+                            <th >Acciones</th>
+                            <th>¿Leido?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <button onclick="ordenar_por_anio()" class="boton_ordenar">Ordenar por año</button>
+            </div>
+            <div class="box_resumen">
+                <h3 class="subtittle">Resumen</h3>
+                <div id="resumen_libros"></div>
+                <div id="contador_checkboxs"></div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/archivo.js"></script>
+</body>
+</html>
