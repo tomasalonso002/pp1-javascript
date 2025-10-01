@@ -1,12 +1,12 @@
 import { useRef, useState, Fragment } from "react";
 import {Card} from "primereact/card";
 import {InputText} from "primereact/inputtext"
-import { SelectButton } from "primereact/selectbutton";
+import {SelectButton} from "primereact/selectbutton";
 import {Button} from  "primereact/button";
 import { Toast } from "primereact/toast";
 import Swal from "sweetalert2"
-import { Checkbox } from 'primereact/checkbox';
-        
+import {Checkbox} from 'primereact/checkbox';
+import 'primeicons/primeicons.css';
 
 const opcionesColor =[
     {label:'Rojo', value:'red'},
@@ -21,31 +21,48 @@ const Tarjeta = () =>{
     const [terminos, setTerminos] = useState(false)
     const toast = useRef(null)
 
+    const emailValido = email.includes('@') && email.includes('.')
+    const formularioValido = nombre.trim() !== "" && emailValido && terminos && color !== 'grey'    
 
-    const formularioValido = nombre && email && terminos && color.value != 'grey'
+    const guardarEnLocalStorage = (persona) => {
+        const existente = localStorage.getItem('personas')
+        const lista = existente ? JSON.parse(existente): []
+        lista.push(persona)
+        localStorage.setItem('personas', JSON.stringify(lista))
+    }
 
-    const limpiar = ()=>{
+    const limpiarFormulario = ()=>{
         setNombre("")
         setEmail('')
         setTerminos(false)
         setColor('gray')
     }
+
     const confirmarFormulario =() =>{
         Swal.fire({
             title:'confirmar formulario?',
-            text: `Nombre ${nombre || "Sin nombre"} Color: ${color}`,
+            text: `Nombre ${nombre || "Sin nombre"} | Email ${email || "Sin Email"} | Color: ${color}`,
             showCancelButton:true,
             confirmButtonText:'Si Guardar',
             cancelButtonText:'Cancelar'
         }).then((result)=>{
             if(result.isConfirmed){
+                guardarEnLocalStorage({
+                    nombre: nombre || 'Sin nombre',
+                    email: email || 'Sin email',
+                    color,
+                    aceptaTerminos:terminos,
+                    createdAt: new Date()
+                })
+
+
                 toast.current?.show({
                     severity:'success',
                     summary:'Guardado',
                     detail:'Tarjeta guardada'
                 })
+                limpiarFormulario()
             }
-            limpiar()
         })
     }
     
@@ -61,14 +78,16 @@ const Tarjeta = () =>{
                         />
                         <label htmlFor="nombre">Nombre</label>
                     </span>
-                    <div className="p-float-label">
+                    {!nombre.trim() && <p>Debes ingresar el nombre</p>}
+                    <span className="p-float-label">
                         <InputText 
                         id="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         />
                         <label htmlFor="email">Email</label>
-                    </div>
+                    </span>
+                    {(!email && !emailValido) && <p>Email Invalido</p>}
                     <div>
                         <small>Definir el fondo</small>
                         <SelectButton
@@ -77,6 +96,7 @@ const Tarjeta = () =>{
                         options={opcionesColor}
                         />
                     </div>
+                    {!color === 'grey' && <p>Debese seleccionar un color</p>}
                     <div style={{
                         backgroundColor: color,
                         borderRadius:12,
@@ -89,12 +109,13 @@ const Tarjeta = () =>{
 
                     <div>
                         <Checkbox
-                        id="terminos"
+                        inputId="terminos"
                         checked={terminos}
                         onChange={(e) => setTerminos(e.checked)}
                         />
                         <label htmlFor="terminos">Acepto los terminos y condiciones</label>
                     </div>
+                    {!terminos && <p>Debes aceptar terminos</p>}
                     <div
                         style={{
                         display:'flex',
@@ -105,8 +126,7 @@ const Tarjeta = () =>{
                         />
                         <Button
                         label="Limpiar"
-                        onClick={()=>limpiar()}
-    
+                        onClick={()=>limpiarFormulario()} 
                         />
                     </div>
                 </div>

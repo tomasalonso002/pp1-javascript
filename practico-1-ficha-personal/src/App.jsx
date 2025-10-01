@@ -1,14 +1,17 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import Tarjeta from './Tarjeta'
-
+import { Routes, Route } from 'react-router-dom'
+import Home from './layout/Home'
+import Tarjeta from './layout/Tarjeta'
+import { Fragment } from 'react'
+import Personas from './layout/Personas'
 function App() {
-  const [count, setCount] = useState(0)
   
   return (
-    <Tarjeta></Tarjeta>
+    <Routes>
+      <Route path='/' element={<Home/>}/>
+      <Route path='/tarjeta' element={<Tarjeta/>}/>
+      <Route path='/personas' element={<Personas/>}/>
+    </Routes>
   )
 }
 
