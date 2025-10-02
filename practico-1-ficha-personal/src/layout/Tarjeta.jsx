@@ -1,4 +1,4 @@
-import { useRef, useState, Fragment } from "react";
+import { useRef, useState, Fragment, useEffect } from "react";
 import {Card} from "primereact/card";
 import {InputText} from "primereact/inputtext"
 import {SelectButton} from "primereact/selectbutton";
@@ -7,6 +7,7 @@ import { Toast } from "primereact/toast";
 import Swal from "sweetalert2"
 import {Checkbox} from 'primereact/checkbox';
 import 'primeicons/primeicons.css';
+import { useParams, useNavigate } from "react-router-dom";
 
 const opcionesColor =[
     {label:'Rojo', value:'red'},
@@ -20,19 +21,43 @@ const Tarjeta = () =>{
     const [color, setColor] = useState("grey")
     const [terminos, setTerminos] = useState(false)
     const toast = useRef(null)
+    const {id} = useParams() 
+    const editIndex = Number.isInteger(parseInt(id)) ? parseInt(id) : null
+    const navigate = useNavigate()
+
+
+    useEffect(()=>{
+        if(editIndex !== null || undefined){
+            const data = localStorage.getItem('personas')
+            const arr = data ? JSON.parse(data) : []
+            const persona = arr[editIndex]
+            
+            if(persona){
+                setNombre(persona.nombre || '')
+                setEmail(persona.email || '')
+                setColor(persona.color || '')
+                setTerminos(persona.terminos || '')
+            }
+        }
+    },[editIndex])
 
     const emailValido = email.includes('@') && email.includes('.')
-    const formularioValido = nombre.trim() !== "" && emailValido && terminos && color !== 'grey'    
+    const formularioValido = nombre.trim() !== "" && emailValido && terminos && color !== 'grey'
+
 
     const guardarEnLocalStorage = (persona) => {
         const existente = localStorage.getItem('personas')
         const lista = existente ? JSON.parse(existente): []
-        lista.push(persona)
+        if (editIndex !== null && lista[editIndex]){
+            lista[editIndex] = {...lista[editIndex], ...persona, updatedAt:new Date()}
+        }else{
+            lista.push({...persona, createdAt: new Date()})
+        }
         localStorage.setItem('personas', JSON.stringify(lista))
     }
 
     const limpiarFormulario = ()=>{
-        setNombre("")
+        setNombre('')
         setEmail('')
         setTerminos(false)
         setColor('gray')
@@ -62,6 +87,7 @@ const Tarjeta = () =>{
                     detail:'Tarjeta guardada'
                 })
                 limpiarFormulario()
+                navigate('/personas')
             }
         })
     }

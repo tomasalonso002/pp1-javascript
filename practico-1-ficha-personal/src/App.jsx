@@ -10,6 +10,7 @@ function App() {
     <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/tarjeta' element={<Tarjeta/>}/>
+      <Route path='/tarjeta/:id' element={<Tarjeta/>}/>
       <Route path='/personas' element={<Personas/>}/>
     </Routes>
   )
